@@ -67,12 +67,20 @@ function App() {
 
   // Handle pinch out gesture (zoom in)
   function handlePinchOut() {
-    if (view === "year") {
+    if (view === "year" && hoveredMonth != null) {
       setTransition("zoom-in");
+      const newDate = new Date(currentDate);
+      newDate.setMonth(hoveredMonth);
+      setCurrentDate(newDate);
       setTimeout(() => {
         setView("month");
         setTimeout(() => setTransition(""), 50);
       }, 300);
+      // setTransition("zoom-in");
+      // setTimeout(() => {
+      //   setView("month");
+      //   setTimeout(() => setTransition(""), 50);
+      // }, 300);
     } else if (view === "month") {
       // Try to find date element under the cursor
       const element = document.elementFromPoint(
