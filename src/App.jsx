@@ -15,6 +15,22 @@ function App() {
   const appRef = useRef(null);
   const [hoveredMonth, setHoveredMonth] = useState(null);
 
+  // Month names for reference
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   // Use the gesture detector hook
   const { mousePosition, addGestureListeners, removeGestureListeners } =
     useGestureDetector({
@@ -28,6 +44,16 @@ function App() {
       setTransition("zoom-out");
       setTimeout(() => {
         setView("year");
+        setTimeout(() => setTransition(""), 50);
+      }, 300);
+    } else if (view === "year" && hoveredMonth !== null) {
+      // If hovering over a month, navigate to that month
+      setTransition("zoom-in");
+      const newDate = new Date(currentDate);
+      newDate.setMonth(hoveredMonth);
+      setCurrentDate(newDate);
+      setTimeout(() => {
+        setView("month");
         setTimeout(() => setTransition(""), 50);
       }, 300);
     } else if (view === "note") {

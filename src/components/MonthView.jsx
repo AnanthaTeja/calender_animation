@@ -1,8 +1,12 @@
 // MonthView.jsx - Monthly calendar view component
 import React from "react";
 
-function MonthView({ currentDate, setCurrentDate, notes, openNoteForDate }) {
-  const monthNames = [
+function MonthView({
+  currentDate,
+  setCurrentDate,
+  notes,
+  openNoteForDate,
+  monthNames = [
     "January",
     "February",
     "March",
@@ -15,8 +19,8 @@ function MonthView({ currentDate, setCurrentDate, notes, openNoteForDate }) {
     "October",
     "November",
     "December",
-  ];
-
+  ],
+}) {
   const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   // Navigate to previous month

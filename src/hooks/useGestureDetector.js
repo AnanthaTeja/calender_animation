@@ -65,6 +65,7 @@ export function useGestureDetector({ onPinchIn, onPinchOut }) {
       if (pinchRatio < 1 - pinchThresholdRef.current) {
         // Pinch in (fingers moving together)
         if (onPinchIn) {
+          e.preventDefault(); // Prevent default to avoid browser zooming
           onPinchIn();
           lastPinchTimeRef.current = now;
           touchStartRef.current = null;
@@ -72,6 +73,7 @@ export function useGestureDetector({ onPinchIn, onPinchOut }) {
       } else if (pinchRatio > 1 + pinchThresholdRef.current) {
         // Pinch out (fingers moving apart)
         if (onPinchOut) {
+          e.preventDefault(); // Prevent default to avoid browser zooming
           onPinchOut();
           lastPinchTimeRef.current = now;
           touchStartRef.current = null;

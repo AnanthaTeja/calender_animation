@@ -8,8 +8,7 @@ function YearView({
   hoveredMonth,
   setHoveredMonth,
   mousePosition,
-}) {
-  const monthNames = [
+  monthNames = [
     "January",
     "February",
     "March",
@@ -22,11 +21,11 @@ function YearView({
     "October",
     "November",
     "December",
-  ];
-
+  ],
+}) {
   const monthsGridRef = useRef(null);
 
-  // Track mouse position over months
+  // Track mouse position over months with improved hover detection
   useEffect(() => {
     const checkHoveredMonth = () => {
       if (!monthsGridRef.current) return;
@@ -46,20 +45,22 @@ function YearView({
           setHoveredMonth(monthIndex);
 
           // Add a visual indicator for the hovered month
-          const allMonths = document.querySelectorAll(".month-preview");
-          allMonths.forEach((month) => {
+          document.querySelectorAll(".month-preview").forEach((month) => {
             month.classList.remove("pinch-indicator");
           });
           monthElement.classList.add("pinch-indicator");
+
+          // Also add a clear data attribute for pinch detection
+          monthElement.setAttribute("data-hovered", "true");
         }
       } else {
         if (hoveredMonth !== null) {
           setHoveredMonth(null);
 
           // Remove visual indicators when not hovering over any month
-          const allMonths = document.querySelectorAll(".month-preview");
-          allMonths.forEach((month) => {
+          document.querySelectorAll(".month-preview").forEach((month) => {
             month.classList.remove("pinch-indicator");
+            month.removeAttribute("data-hovered");
           });
         }
       }
